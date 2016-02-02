@@ -1,0 +1,11 @@
+{
+  "esnext": true,
+  "disallowSpacesInsideParentheses": true,
+  "disallowTrailingComma": true,
+  "requireBlocksOnNewline": true,
+  "requireCamelCaseOrUpperCaseIdentifiers": "ignoreProperties",
+  "validateIndentation": 2,
+  "validateQuoteMarks": false,
+  "requireEnhancedObjectLiterals": false,
+  "excludeFiles": [ ]
+}
