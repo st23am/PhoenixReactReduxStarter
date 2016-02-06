@@ -1,5 +1,5 @@
 import React from 'react';
-import _ from 'underscore';
+import * as _ from 'lodash';
 
 export default function turnReducer(state, action) {
   switch (action.type) {

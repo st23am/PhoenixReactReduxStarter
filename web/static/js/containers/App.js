@@ -4,10 +4,6 @@ import { Provider } from 'react-redux';
 import turnReducer from '../reducers/turnReducer';
 import { TurnTrackerContainer } from './TurnTracker';
 
-const finalCreateStore = compose(
-  window.devToolsExtension ? window.devToolsExtension() : f => f
-)(createStore);
-
 let initialState = {
   roundNumber: 1,
   turnNumber: 0,
@@ -27,6 +23,9 @@ let initialState = {
   ]
 };
 
+const finalCreateStore = compose(
+  window.devToolsExtension ? window.devToolsExtension() : f => f
+)(createStore);
 
 const store = finalCreateStore(turnReducer, initialState);
 

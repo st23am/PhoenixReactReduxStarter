@@ -67,13 +67,17 @@ exports.config = {
     // Whitelist the npm deps to be pulled in as front-end assets.
     // All other deps in package.json will be excluded from the bundle.
 
-    whitelist: ["underscore",
+    whitelist: ["lodash",
                 "immutable",
                 "phoenix",
                 "phoenix_html",
                 "react",
                 "redux",
                 "react-redux",
-                "react-dom"]
+                "react-dom",
+                "redux-devtools",
+                "redux-devtools-dock-monitor",
+                "redux-devtools-log-monitor"
+               ]
   }
 };
