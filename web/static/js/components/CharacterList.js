@@ -6,6 +6,7 @@ export const CharacterList = ({
   onAddCharacter
 }) => (
     <div>
+    <h3> Characters </h3>
     <ul>
     { characters.map((character, index) =>
                      <Character

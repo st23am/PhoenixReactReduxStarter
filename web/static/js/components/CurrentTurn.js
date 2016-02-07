@@ -16,6 +16,7 @@ export const CurrentTurn = ({
               <h3>Round: {roundNumber} Turn {turnNumber}
               <button onClick={() => onEndCombat()}> Clear </button>
               </h3>
+              <h4> Current Turn: </h4>
               <span>
                 name: { currentTurn[0].name } HP: {currentTurn[0].hp} AC: {currentTurn[0].ac}
                 <button onClick={() => onNextTurn()}> Next </button>

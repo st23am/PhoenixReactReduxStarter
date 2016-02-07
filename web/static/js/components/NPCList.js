@@ -6,6 +6,7 @@ export const NPCList = ({
   onAddNPC
 }) => (
   <div>
+    <h3> NPCs </h3>
     <ul>
       { npcs.map((npc, index) =>
                  <NPC npc={npc} key={index} onAddNPC={onAddNPC}/>
