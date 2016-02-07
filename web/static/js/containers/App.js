@@ -6,7 +6,7 @@ import promise from 'redux-promise';
 import DevTools from './DevTools';
 import createLogger from 'redux-logger';
 import turnReducer from '../reducers/turnReducer';
-import { TurnTrackerContainer } from './TurnTracker';
+import { TurnTrackerApp } from './TurnTrackerApp';
 
 
 let initialState = {
@@ -42,7 +42,7 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <div>
-          <TurnTrackerContainer  />
+          <TurnTrackerApp  />
           <DevTools />
         </div>
       </Provider>

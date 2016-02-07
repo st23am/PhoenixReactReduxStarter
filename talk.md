@@ -1,6 +1,6 @@
 #TODO
 
- - [ ] Create Action Creators
+ - [X] Create Action Creators
  
  - [ ] Create Game, Character and NPC Phoenix Models
 
@@ -25,7 +25,7 @@
 
   - About Me
 
-### Intro to Phoenix and Elixir
+### Intro to Elixir
 
   - History 
 
@@ -37,11 +37,19 @@
 
   - Pipes
 
+  - Erlang Interop
+
   - Processes
   
   - Stateful Servers
 
   - Supervision
+
+  - Tooling 
+
+### Phoenix
+
+ - Series of Plugs
 
 ### Introduction to React
 
@@ -56,8 +64,16 @@
  - Three Philosophies
 
 ### The Client just another Node in the Distributed System
+ - Actions
+   Tell What happened in your Application
 
  - Reducer Pattern
+
+   Tell How the state will changed based on what happened.
+
+   `(previousState, action) => newState`
+
+   "It’s a good idea to think of its shape before writing any code. What’s the minimal representation of your app’s state as an object?" 
 
    - Compare to GenServer
 
@@ -66,11 +82,6 @@
  - Testing
 
  - ? Functional Reactivity
-
-### Phoenix
-
- - Series of Plugs
-   
 
 ### Enter Channels
 

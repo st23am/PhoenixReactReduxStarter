@@ -1,9 +1,10 @@
 import React from 'react';
 import * as _ from 'lodash';
+import { ADD_CHARACTER, ADD_NPC, REMOVE_COMBATANT, NEXT_TURN, END_COMBAT } from "../actions";
 
 export default function turnReducer(state, action) {
   switch (action.type) {
-    case 'NEXT_TURN':
+    case NEXT_TURN:
       if(_.isEmpty(state.combatants)) { return state; };
       let currentTurn = [];
       let index = 0;
@@ -31,7 +32,7 @@ export default function turnReducer(state, action) {
         currentTurn: currentTurn
       };
 
-    case 'ADD_CHARACTER':
+    case ADD_CHARACTER:
       let combatantsPlusCharacter = _.orderBy([...state.combatants, action.character], ['init', 'agi'], ['desc', 'desc']);
       return { ...state, combatants:  combatantsPlusCharacter };
 
@@ -39,7 +40,7 @@ export default function turnReducer(state, action) {
       let combatantsPlusNPC = _.orderBy([...state.combatants, action.npc], ['init', 'agi'], ['desc', 'desc']);
       return {...state, combatants: combatantsPlusNPC};
 
-    case 'END_COMBAT':
+    case END_COMBAT:
      return {
        ...state,
        roundNumber: 1,
@@ -48,7 +49,7 @@ export default function turnReducer(state, action) {
        combatants: []
      };
 
-    case 'REMOVE_COMBATANT':
+    case REMOVE_COMBATANT:
       return state;
 
     default:
