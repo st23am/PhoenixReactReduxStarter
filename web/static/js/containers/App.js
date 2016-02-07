@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
-import { createStore, compose } from 'redux';
+import { applyMiddleware, createStore, compose } from 'redux';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import promise from 'redux-promise';
+import DevTools from './DevTools';
+import createLogger from 'redux-logger';
 import turnReducer from '../reducers/turnReducer';
 import { TurnTrackerContainer } from './TurnTracker';
+
 
 let initialState = {
   roundNumber: 1,
@@ -23,8 +28,11 @@ let initialState = {
   ]
 };
 
+const logger = createLogger({collapsed: true});
+
 const finalCreateStore = compose(
-  window.devToolsExtension ? window.devToolsExtension() : f => f
+  DevTools.instrument(),
+  applyMiddleware(thunk, promise, logger)
 )(createStore);
 
 const store = finalCreateStore(turnReducer, initialState);
@@ -35,6 +43,7 @@ export default class App extends Component {
       <Provider store={store}>
         <div>
           <TurnTrackerContainer  />
+          <DevTools />
         </div>
       </Provider>
     );
