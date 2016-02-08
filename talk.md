@@ -4,7 +4,7 @@
  
  - [X] Create Character and NPC Phoenix Models
 
- - [ ] Hook up Thunk Middleware for Fetching the above
+ - [X] Hook up Thunk Middleware for Fetching the above
 
  - [ ] Create Game and store state GenServer/Agent
  
@@ -51,6 +51,13 @@
 
  - Series of Plugs
 
+   connection
+   |> endpoint
+   |> router
+   |> pipelines
+   |> controller
+
+
 ### Introduction to React
 
   - Components / JSX 
@@ -61,9 +68,22 @@
 
 ### Enter Redux
 
- - Three Philosophies
+- Three Philosophies
+  - Single source of truth
+
+    `The state of your whole application is stored in an object tree within a single store.`
+  
+  - State is read-only
+
+    `The only way to mutate the state is to emit an action, an object describing what happened.`
+
+  - Changes are made with pure functions
+
+  `To specify how the state tree is transformed by actions, you write pure reducers.`
+
 
 ### The Client just another Node in the Distributed System
+
  - Actions
    Tell What happened in your Application
 

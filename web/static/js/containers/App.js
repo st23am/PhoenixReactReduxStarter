@@ -6,17 +6,7 @@ import turnReducer from '../reducers/turnReducer';
 import { TurnTrackerApp } from './TurnTrackerApp';
 import { getAllCharacters, getAllNPCS } from '../actions';
 
-
-let initialState = {
-  roundNumber: 1,
-  turnNumber: 0,
-  currentTurn: [],
-  characters: [],
-  npcs: [],
-  combatants: []
-};
-
-const store = createStore(turnReducer, initialState, compose(
+const store = createStore(turnReducer, compose(
   applyMiddleware(thunk),
   window.devToolsExtension ? window.devToolsExtension() : f => f
 ));

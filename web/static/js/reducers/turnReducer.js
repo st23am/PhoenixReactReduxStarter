@@ -8,7 +8,16 @@ import { ADD_CHARACTER,
          RECEIVE_NPCS,
          REMOVE_COMBATANT } from "../actions";
 
-export default function turnReducer(state, action) {
+let initialState = {
+  roundNumber: 1,
+  turnNumber: 0,
+  currentTurn: [],
+  characters: [],
+  npcs: [],
+  combatants: []
+};
+
+export default function turnReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_CHARACTER:
       let character = Object.assign({}, action.character, {uid: Math.random()});
