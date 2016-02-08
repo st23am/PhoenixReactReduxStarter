@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import turnReducer from '../reducers/turnReducer';
 import { TurnTrackerApp } from './TurnTrackerApp';
-import { getAllCharacters } from '../actions';
+import { getAllCharacters, getAllNPCS } from '../actions';
 
 
 let initialState = {
@@ -12,14 +12,8 @@ let initialState = {
   turnNumber: 0,
   currentTurn: [],
   characters: [],
-  npcs: [
-    {name: 'goblin', init: 7, hp: 3, ac: 10, agiMod: 2},
-    {name: 'bugbear', init: 8, hp: 13, ac: 10, agiMod: 1},
-    {name: 'hobgoblin', init: 4, hp: 7, ac: 12, agiMod: 1},
-    {name: 'skeleton', init: 10, hp: 5, ac: 10, agiMod: 0},
-  ],
-  combatants: [
-  ]
+  npcs: [],
+  combatants: []
 };
 
 const store = createStore(turnReducer, initialState, compose(
@@ -29,7 +23,10 @@ const store = createStore(turnReducer, initialState, compose(
 
 export default class App extends Component {
   render() {
+
     store.dispatch(getAllCharacters());
+    store.dispatch(getAllNPCS());
+
     return (
       <Provider store={store}>
         <div>

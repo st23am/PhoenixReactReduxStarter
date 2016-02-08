@@ -5,6 +5,7 @@ import { ADD_CHARACTER,
          END_COMBAT,
          NEXT_TURN,
          RECEIVE_CHARACTERS,
+         RECEIVE_NPCS,
          REMOVE_COMBATANT } from "../actions";
 
 export default function turnReducer(state, action) {
@@ -34,6 +35,13 @@ export default function turnReducer(state, action) {
         return state;
       } else {
         return {...state, characters: action.characters};
+      };
+
+    case RECEIVE_NPCS:
+      if(_.isEmpty(action.npcs)) {
+        return state;
+      } else {
+        return {...state, npcs: action.npcs};
       };
 
     case NEXT_TURN:
