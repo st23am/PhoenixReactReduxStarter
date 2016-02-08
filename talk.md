@@ -2,11 +2,11 @@
 
  - [X] Create Action Creators
  
- - [ ] Create Game, Character and NPC Phoenix Models
+ - [X] Create Character and NPC Phoenix Models
 
  - [ ] Hook up Thunk Middleware for Fetching the above
 
- - [ ] Create Game State GenServer/Agent
+ - [ ] Create Game and store state GenServer/Agent
  
  - [ ] Create Channels and Wireup to Redux for syncing Game state
 

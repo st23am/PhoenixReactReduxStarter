@@ -20,7 +20,10 @@ defmodule InitTracker.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", InitTracker do
-  #   pipe_through :api
-  # end
+  scope "/api", InitTracker do
+     pipe_through :api
+
+     resources "/characters", CharacterController, except: [:new, :edit]
+     resources "/npcs", NPCController, except: [:new, :edit]
+   end
 end
