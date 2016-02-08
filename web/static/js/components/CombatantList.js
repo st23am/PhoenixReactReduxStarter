@@ -9,8 +9,9 @@ export const CombatantList = ({
     <ul>
       { combatants.map((combatant, index) =>
                       <Combatant combatant={combatant}
-                      key={index}
-                      onClick={() => onRemoveCombatant(combatant)} />)}
+                                 key={index + Math.random()}
+                                 onClick={() => onRemoveCombatant(combatant)} />)
+      }
     </ul>
   </div>
 );

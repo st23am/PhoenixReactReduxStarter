@@ -11,11 +11,13 @@ import { ADD_CHARACTER,
 export default function turnReducer(state, action) {
   switch (action.type) {
     case ADD_CHARACTER:
-      let combatantsPlusCharacter = _.orderBy([...state.combatants, action.character], ['init', 'agi'], ['desc', 'desc']);
+      let character = Object.assign({}, action.character, {uid: Math.random()});
+      let combatantsPlusCharacter = _.orderBy([...state.combatants, character], ['init', 'agi'], ['desc', 'desc']);
       return { ...state, combatants:  combatantsPlusCharacter };
 
     case 'ADD_NPC':
-      let combatantsPlusNPC = _.orderBy([...state.combatants, action.npc], ['init', 'agi'], ['desc', 'desc']);
+      let npc = Object.assign({}, action.npc, {uid: Math.random()});
+      let combatantsPlusNPC = _.orderBy([...state.combatants, npc], ['init', 'agi'], ['desc', 'desc']);
       return {...state, combatants: combatantsPlusNPC};
 
     case END_COMBAT:
@@ -50,11 +52,10 @@ export default function turnReducer(state, action) {
       let index = 0;
       let roundNumber = state.roundNumber || 1;
       let turnNumber = state.turnNumber || 0;
-
       if(_.isEmpty(state.currentTurn)){
         currentTurn = [state.combatants[0]];
       } else {
-        index = _.findIndex(state.combatants, function(c) { return c.name == state.currentTurn[0].name; }) + 1;
+        index = _.findIndex(state.combatants, function(c) { return (c.name == state.currentTurn[0].name && c.uid == state.currentTurn[0].uid); }) + 1;
         if(index === state.combatants.length) {
           roundNumber = state.roundNumber + 1;
           turnNumber = 0;
