@@ -2,22 +2,16 @@ import React, { Component } from 'react';
 import { applyMiddleware, createStore, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import promise from 'redux-promise';
-import DevTools from './DevTools';
-import createLogger from 'redux-logger';
 import turnReducer from '../reducers/turnReducer';
 import { TurnTrackerApp } from './TurnTrackerApp';
+import { getAllCharacters } from '../actions';
 
 
 let initialState = {
   roundNumber: 1,
   turnNumber: 0,
   currentTurn: [],
-  characters: [
-    {name: 'frank', init: 10, hp: 10, ac: 12, agiMod: 1},
-    {name: 'joe', init: 7, hp: 10, ac: 12, agiMod: 0},
-    {name: 'susan', init: 5, hp: 10, ac: 12, agiMod: 1},
-  ],
+  characters: [],
   npcs: [
     {name: 'goblin', init: 7, hp: 3, ac: 10, agiMod: 2},
     {name: 'bugbear', init: 8, hp: 13, ac: 10, agiMod: 1},
@@ -28,22 +22,18 @@ let initialState = {
   ]
 };
 
-const logger = createLogger({collapsed: true});
-
-const finalCreateStore = compose(
-  DevTools.instrument(),
-  applyMiddleware(thunk, promise, logger)
-)(createStore);
-
-const store = finalCreateStore(turnReducer, initialState);
+const store = createStore(turnReducer, initialState, compose(
+  applyMiddleware(thunk),
+  window.devToolsExtension ? window.devToolsExtension() : f => f
+));
 
 export default class App extends Component {
   render() {
+    store.dispatch(getAllCharacters());
     return (
       <Provider store={store}>
         <div>
           <TurnTrackerApp  />
-          <DevTools />
         </div>
       </Provider>
     );

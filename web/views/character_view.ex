@@ -17,7 +17,7 @@ defmodule InitTracker.CharacterView do
       ac: character.ac,
       agiMod: character.agi_mod,
       player: character.player,
-      type: 'character'
+      type: "character"
      }
   end
 end

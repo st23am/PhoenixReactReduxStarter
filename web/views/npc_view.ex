@@ -16,7 +16,7 @@ defmodule InitTracker.NPCView do
       hp: npc.hp,
       ac: npc.ac,
       agiMod: npc.agi_mod,
-      type: 'npc'
+      type: "npc"
      }
   end
 end

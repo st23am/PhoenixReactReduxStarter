@@ -1,9 +1,41 @@
 import React from 'react';
 import * as _ from 'lodash';
-import { ADD_CHARACTER, ADD_NPC, REMOVE_COMBATANT, NEXT_TURN, END_COMBAT } from "../actions";
+import { ADD_CHARACTER,
+         ADD_NPC,
+         END_COMBAT,
+         NEXT_TURN,
+         RECEIVE_CHARACTERS,
+         REMOVE_COMBATANT } from "../actions";
 
 export default function turnReducer(state, action) {
   switch (action.type) {
+    case ADD_CHARACTER:
+      let combatantsPlusCharacter = _.orderBy([...state.combatants, action.character], ['init', 'agi'], ['desc', 'desc']);
+      return { ...state, combatants:  combatantsPlusCharacter };
+
+    case 'ADD_NPC':
+      let combatantsPlusNPC = _.orderBy([...state.combatants, action.npc], ['init', 'agi'], ['desc', 'desc']);
+      return {...state, combatants: combatantsPlusNPC};
+
+    case END_COMBAT:
+      return {
+          ...state,
+        roundNumber: 1,
+        turnNumber: 0,
+        currentTurn: [],
+        combatants: []
+      };
+
+    case REMOVE_COMBATANT:
+      return state;
+
+    case RECEIVE_CHARACTERS:
+      if(_.isEmpty(action.characters)) {
+        return state;
+      } else {
+        return {...state, characters: action.characters};
+      };
+
     case NEXT_TURN:
       if(_.isEmpty(state.combatants)) { return state; };
       let currentTurn = [];
@@ -26,33 +58,13 @@ export default function turnReducer(state, action) {
         }
       }
       return {
-        ...state,
+          ...state,
         roundNumber: roundNumber,
         turnNumber: turnNumber + 1,
         currentTurn: currentTurn
       };
 
-    case ADD_CHARACTER:
-      let combatantsPlusCharacter = _.orderBy([...state.combatants, action.character], ['init', 'agi'], ['desc', 'desc']);
-      return { ...state, combatants:  combatantsPlusCharacter };
-
-  case 'ADD_NPC':
-      let combatantsPlusNPC = _.orderBy([...state.combatants, action.npc], ['init', 'agi'], ['desc', 'desc']);
-      return {...state, combatants: combatantsPlusNPC};
-
-    case END_COMBAT:
-     return {
-       ...state,
-       roundNumber: 1,
-       turnNumber: 0,
-       currentTurn: [],
-       combatants: []
-     };
-
-    case REMOVE_COMBATANT:
-      return state;
-
     default:
       return state;
-  }
+  };
 };
