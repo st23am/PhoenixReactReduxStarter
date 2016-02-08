@@ -1,8 +1,9 @@
 import React from 'react';
 
 export const Combatant = ({
-  combatant
+  combatant,
+  key
 }) => (
-  <li key={combatant.id}>{combatant.name} init:{combatant.init} hp:{combatant.hp} ac:{combatant.ac}</li>
+    <li key={key}>{combatant.name} init:{combatant.init} hp:{combatant.hp} ac:{combatant.ac} agiMod:{combatant.agiMod}</li>
 );
 
