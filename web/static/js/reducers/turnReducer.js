@@ -21,12 +21,12 @@ export default function turnReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_CHARACTER:
       let character = Object.assign({}, action.character, {uid: Math.random()});
-      let combatantsPlusCharacter = _.orderBy([...state.combatants, character], ['init', 'agi'], ['desc', 'desc']);
+      let combatantsPlusCharacter = _.orderBy([...state.combatants, character], ['init', 'agiMod'], ['desc', 'desc']);
       return { ...state, combatants:  combatantsPlusCharacter };
 
     case 'ADD_NPC':
       let npc = Object.assign({}, action.npc, {uid: Math.random()});
-      let combatantsPlusNPC = _.orderBy([...state.combatants, npc], ['init', 'agi'], ['desc', 'desc']);
+      let combatantsPlusNPC = _.orderBy([...state.combatants, npc], ['init', 'agiMod'], ['desc', 'desc']);
       return {...state, combatants: combatantsPlusNPC};
 
     case END_COMBAT:
