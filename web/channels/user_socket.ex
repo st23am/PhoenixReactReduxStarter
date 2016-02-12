@@ -3,7 +3,7 @@ defmodule InitTracker.UserSocket do
 
   ## Channels
   # channel "rooms:*", InitTracker.RoomChannel
-
+  channel "games:lobby", InitTracker.GameChannel
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
   # transport :longpoll, Phoenix.Transports.LongPoll

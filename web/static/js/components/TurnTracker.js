@@ -12,16 +12,15 @@ export const TurnTracker = ({
   combatants,
   roundNumber,
   turnNumber,
-  onAddCharacter,
-  onAddNPC,
+  onAddCombatant,
   onRemoveCombatant,
   onNextTurn,
   onEndCombat
 }) => (
   <div>
     <div className="col-lg-6 col-sm-6">
-      <CharacterList characters={characters} onAddCharacter={onAddCharacter}/>
-      <NPCList npcs={npcs} onAddNPC={ onAddNPC }/>
+      <CharacterList characters={characters} onAddCharacter={onAddCombatant}/>
+      <NPCList npcs={npcs} onAddNPC={onAddCombatant}/>
     </div>
     <div className="col-lg-6 col-sm-6">
       <CurrentTurn currentTurn={currentTurn} roundNumber={roundNumber} turnNumber={turnNumber} onNextTurn={onNextTurn} onEndCombat={onEndCombat}/>

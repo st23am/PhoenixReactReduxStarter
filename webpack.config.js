@@ -29,6 +29,11 @@ var config = module.exports = {
   resolve: {
     extensions: ['', '.js', '.sass'],
     modulesDirectories: ['node_modules'],
+    // webpack.config.js
+    alias: {
+      phoenix: __dirname + '/deps/phoenix/web/static/js/phoenix.js',
+      phoenix_html: __dirname + '/deps/phoenix_html/web/static/js/phoenix.js'
+    }
   },
 
   // more information on how our modules are structured, and

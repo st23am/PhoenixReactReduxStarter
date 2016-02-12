@@ -22,9 +22,9 @@ describe('reducer', () => {
 
   describe("CURRENT_TURN", () => {
     it('sets the current turn correctly', () => {
-      let firstState   = turnReducer(initialState, actions.addCharacter({name: "Sue", init: 11, agiMod: 1}));
-      let secondState  = turnReducer(firstState, actions.addCharacter({name: "Joe", init: 10, agiMod: 2}));
-      let currentState = turnReducer(secondState, actions.addCharacter({name: "Goblin", init: 12, agiMod: 1}));
+      let firstState   = turnReducer(initialState, actions.addCombatant({name: "Sue", init: 11, agiMod: 1}));
+      let secondState  = turnReducer(firstState, actions.addCombatant({name: "Joe", init: 10, agiMod: 2}));
+      let currentState = turnReducer(secondState, actions.addCombatant({name: "Goblin", init: 12, agiMod: 1}));
 
       let nextState = turnReducer(currentState, actions.nextTurn());
 
@@ -33,8 +33,8 @@ describe('reducer', () => {
 
     context ("a tie for initiative", () => {
       it("gets resolved using agiMod", () => {
-        let firstState  = turnReducer(initialState, actions.addCharacter({name: "Bugbear", init: 10, agiMod: 1}));
-        let secondState = turnReducer(firstState, actions.addCharacter({name: "Goblin", init: 10, agiMod: 2}));
+        let firstState  = turnReducer(initialState, actions.addCombatant({name: "Bugbear", init: 10, agiMod: 1}));
+        let secondState = turnReducer(firstState, actions.addCombatant({name: "Goblin", init: 10, agiMod: 2}));
         let nextState = turnReducer(secondState, actions.nextTurn());
 
         expect(nextState.combatants[0].name).to.eq("Goblin");

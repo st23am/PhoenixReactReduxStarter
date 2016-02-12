@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import turnReducer from '../reducers/turnReducer';
 import { TurnTrackerApp } from './TurnTrackerApp';
-import { getAllCharacters, getAllNPCS } from '../actions';
+import { subscribeCombatants, getAllCharacters, getAllNPCS } from '../actions';
 
 const store = createStore(turnReducer, compose(
   applyMiddleware(thunk),
@@ -12,10 +12,13 @@ const store = createStore(turnReducer, compose(
 ));
 
 export default class App extends Component {
-  render() {
-
+  componentDidMount() {
     store.dispatch(getAllCharacters());
     store.dispatch(getAllNPCS());
+    store.dispatch(subscribeCombatants());
+  }
+
+  render() {
 
     return (
       <Provider store={store}>

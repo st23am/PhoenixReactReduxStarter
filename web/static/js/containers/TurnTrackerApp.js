@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addCharacter, addNPC, removeCombatant, nextTurn, endCombat } from "../actions";
+import { createCombatant, removeCombatant, nextTurn, endCombat } from "../actions";
 import { TurnTracker } from '../components/TurnTracker';
 
 const mapStateToProps = (state) => {
@@ -16,11 +16,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAddCharacter: (character) => {
-      dispatch(addCharacter(character));
-    },
-    onAddNPC: (npc) => {
-      dispatch(addNPC(npc));
+    onAddCombatant: (combatant) => {
+      dispatch(createCombatant(combatant));
     },
     onRemoveCombatant: (combatant) => {
       dispatch(removeCombatant(combatant));

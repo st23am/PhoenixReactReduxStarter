@@ -1,7 +1,6 @@
 import React from 'react';
 import * as _ from 'lodash';
-import { ADD_CHARACTER,
-         ADD_NPC,
+import { ADD_COMBATANT,
          END_COMBAT,
          NEXT_TURN,
          RECEIVE_CHARACTERS,
@@ -19,15 +18,10 @@ let initialState = {
 
 export default function turnReducer(state = initialState, action) {
   switch (action.type) {
-    case ADD_CHARACTER:
-      let character = Object.assign({}, action.character, {uid: Math.random()});
-      let combatantsPlusCharacter = _.orderBy([...state.combatants, character], ['init', 'agiMod'], ['desc', 'desc']);
-      return { ...state, combatants:  combatantsPlusCharacter };
-
-    case 'ADD_NPC':
-      let npc = Object.assign({}, action.npc, {uid: Math.random()});
-      let combatantsPlusNPC = _.orderBy([...state.combatants, npc], ['init', 'agiMod'], ['desc', 'desc']);
-      return {...state, combatants: combatantsPlusNPC};
+    case 'ADD_COMBATANT':
+      let combatant = Object.assign({}, action.combatant, {uid: Math.random()});
+      let combatantsPlusCombatant = _.orderBy([...state.combatants, combatant], ['init', 'agiMod'], ['desc', 'desc']);
+      return {...state, combatants: combatantsPlusCombatant};
 
     case END_COMBAT:
       return {
