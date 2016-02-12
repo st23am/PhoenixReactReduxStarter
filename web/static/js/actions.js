@@ -1,21 +1,23 @@
 import thunk from 'redux-thunk';
 import fetch        from 'isomorphic-fetch';
 import { polyfill } from 'es6-promise';
+import { Socket } from 'phoenix';
 
+
+// Action Types
 export const ADD_COMBATANT = 'ADD_COMBATANT';
 export const ADD_COMBATANTS = 'ADD_COMBATANTS';
-export const CREATE_COMBATANT_REQUEST = 'REMOVE_COMBATANT_REQUEST';
 export const REMOVE_COMBATANT = 'REMOVE_COMBATANT';
 export const NEXT_TURN = 'NEXT_TURN';
 export const END_COMBAT = 'END_COMBAT';
-export const END_COMBAT_REQUEST = 'END_COMBAT_REQUEST';
 export const RECEIVE_CHARACTERS = 'RECEIVE_CHARACTERS';
 export const RECEIVE_NPCS = 'RECEIVE_NPCS';
-import { configureChannel } from './channel';
+
 
 // ASYNC Action Creators
-
-export const channel = configureChannel();
+let socket = new Socket("/socket");
+socket.connect();
+let channel = socket.channel('games:lobby');
 
 export function subscribeCombatants() {
   return dispatch => {
@@ -55,7 +57,7 @@ export function getAllNPCS() {
   };
 };
 
-export function createCombatant(combatant) {
+export function createCombatantRequest(combatant) {
   return dispatch => {
     let payload = {
       data: combatant
@@ -69,6 +71,7 @@ export function createCombatant(combatant) {
       });
   };
 }
+
 export function endCombatRequest() {
   return dispatch => {
     channel.push('clear:gamestate', {})

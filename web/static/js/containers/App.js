@@ -12,6 +12,7 @@ const store = createStore(turnReducer, compose(
 ));
 
 export default class App extends Component {
+
   componentDidMount() {
     store.dispatch(getAllCharacters());
     store.dispatch(getAllNPCS());
@@ -19,7 +20,6 @@ export default class App extends Component {
   }
 
   render() {
-
     return (
       <Provider store={store}>
         <div>
