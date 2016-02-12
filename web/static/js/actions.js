@@ -3,10 +3,12 @@ import fetch        from 'isomorphic-fetch';
 import { polyfill } from 'es6-promise';
 
 export const ADD_COMBATANT = 'ADD_COMBATANT';
+export const ADD_COMBATANTS = 'ADD_COMBATANTS';
 export const CREATE_COMBATANT_REQUEST = 'REMOVE_COMBATANT_REQUEST';
 export const REMOVE_COMBATANT = 'REMOVE_COMBATANT';
 export const NEXT_TURN = 'NEXT_TURN';
 export const END_COMBAT = 'END_COMBAT';
+export const END_COMBAT_REQUEST = 'END_COMBAT_REQUEST';
 export const RECEIVE_CHARACTERS = 'RECEIVE_CHARACTERS';
 export const RECEIVE_NPCS = 'RECEIVE_NPCS';
 import { configureChannel } from './channel';
@@ -17,6 +19,14 @@ export const channel = configureChannel();
 
 export function subscribeCombatants() {
   return dispatch => {
+    channel.join()
+      .receive('ok', response => dispatch(addCombatants(response.gamestate)))
+      .receive('error', reason => console.log('failed join', reason));
+
+    channel.on('clear:gamestate', response => {
+      dispatch(endCombat());
+    });
+
     channel.on('new:combatant', response => {
       dispatch(addCombatant(response.data));
     });
@@ -59,7 +69,17 @@ export function createCombatant(combatant) {
       });
   };
 }
-
+export function endCombatRequest() {
+  return dispatch => {
+    channel.push('clear:gamestate', {})
+      .receive('ok', response => {
+        console.log('combat Ended');
+      })
+      .receive('error', error => {
+        console.log('error ending combat');
+      });
+  };
+}
 export function receiveNPCS(npcs) {
   return {type: RECEIVE_NPCS,
           npcs: npcs };
@@ -71,6 +91,11 @@ export function receiveCharacters(characters) {
 };
 
 // Sync Action Creators
+export function addCombatants(combatants) {
+  return { type: ADD_COMBATANTS, combatants: combatants} ;
+};
+
+
 export function addCombatant(combatant) {
   return { type: ADD_COMBATANT, combatant: combatant} ;
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import * as _ from 'lodash';
 import { ADD_COMBATANT,
+         ADD_COMBATANTS,
          END_COMBAT,
          NEXT_TURN,
          RECEIVE_CHARACTERS,
@@ -22,6 +23,17 @@ export default function turnReducer(state = initialState, action) {
       let combatant = Object.assign({}, action.combatant, {uid: Math.random()});
       let combatantsPlusCombatant = _.orderBy([...state.combatants, combatant], ['init', 'agiMod'], ['desc', 'desc']);
       return {...state, combatants: combatantsPlusCombatant};
+
+    case 'ADD_COMBATANTS':
+      if(_.isEmpty(action.combatants)){
+        return state;
+      }
+
+      let combatants = _.forEach(action.combatants, function(value) {
+        Object.assign({}, value, {uid: Math.random()});
+      });
+      let orderedCombatants = _.orderBy(combatants, ['init', 'agiMod'], ['desc', 'desc']);
+      return {...state, combatants: orderedCombatants};
 
     case END_COMBAT:
       return {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createCombatant, removeCombatant, nextTurn, endCombat } from "../actions";
+import { createCombatant, removeCombatant, nextTurn, endCombatRequest } from "../actions";
 import { TurnTracker } from '../components/TurnTracker';
 
 const mapStateToProps = (state) => {
@@ -26,7 +26,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(nextTurn());
     },
     onEndCombat: () => {
-      dispatch(endCombat());
+      dispatch(endCombatRequest());
     }
   };
 };

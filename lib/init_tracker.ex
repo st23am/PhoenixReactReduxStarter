@@ -13,6 +13,7 @@ defmodule InitTracker do
       supervisor(InitTracker.Repo, []),
       # Here you could define other workers and supervisors as children
       # worker(InitTracker.Worker, [arg1, arg2, arg3]),
+      worker(InitTracker.GameServer, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

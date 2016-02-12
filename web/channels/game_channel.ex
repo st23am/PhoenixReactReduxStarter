@@ -1,10 +1,12 @@
 defmodule InitTracker.GameChannel do
+  alias InitTracker.GameServer
   use InitTracker.Web, :channel
   require Logger
 
   def join("games:lobby", payload, socket) do
+    gamestate = GameServer.all()
     if authorized?(payload) do
-      {:ok, socket}
+      {:ok, %{gamestate: gamestate}, socket}
     else
       {:error, %{reason: "unauthorized"}}
     end
@@ -15,9 +17,15 @@ defmodule InitTracker.GameChannel do
   #def handle_in("ping", payload, socket) do
   #  {:reply, {:ok, payload}, socket}
   #end
+  def handle_in("clear:gamestate", _params, socket) do
+    GameServer.clear()
+    broadcast! socket, "clear:gamestate", %{}
+    {:reply, :ok, socket}
+  end
 
   def handle_in("new:combatant", params, socket) do
     Logger.info("RECIEVED NEW COMBATANT #{inspect(params["data"])}")
+    GameServer.add(params["data"])
     broadcast! socket, "new:combatant", %{
       data: params["data"]
     }
